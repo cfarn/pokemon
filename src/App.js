@@ -1,3 +1,4 @@
+// import{Box} from '@chakra-ui/react'
 import {useState, useEffect} from 'react'
 
 const App = () => {
@@ -6,9 +7,6 @@ const App = () => {
   useEffect(() => {
     fetchData()
   }, [])
-
-  // useEffect(() => {
-  // }, [pokemon])
 
   const fetchData = async () => {
     const request = await fetch('https://pokeapi.co/api/v2/pokemon/1')
@@ -33,19 +31,24 @@ const App = () => {
   if(!pokemon){return null }
 
   return (
-    <div>
-      <img src={pokemon.sprites.front_default} alt="pokemon"></img>
-      <h1>{pokemon.name}</h1>
-      <p>Height : {pokemon.height}</p>
-      <p>Weight : {pokemon.weight}</p>
-      <p>Type :</p>
-      <ul>
-        {pokemon.types.map((type) => (
-        <li key={type.slot}>{type.type.name}</li>
-        ))}
-      </ul>
-      <button onClick={randomPokemonClick}>Show random pokemon</button>
-    </div>
+    <main className='bg-primary vh-100'>
+      <div className='row justify-content-center align-items-center'>
+        <div className='card col-3 justify-center p-3'>
+          <img src={pokemon.sprites.other["official-artwork"].front_default} alt="pokemon"></img>
+          <h1 className='text-center'>{pokemon.name}</h1>
+          <p>Height : {pokemon.height}</p>
+          <p>Weight : {pokemon.weight}</p>
+          <p>Type :</p>
+          <ul>
+            {pokemon.types.map((type) => (
+            <li key={type.slot}>{type.type.name}</li>
+            ))}
+          </ul>
+          <button onClick={randomPokemonClick} className='btn btn-outline-primary'>Show random pokemon</button>
+        </div>
+      </div>
+    </main>
+    
   )
 }
 
