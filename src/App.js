@@ -13,13 +13,22 @@ const App = () => {
   const fetchData = async () => {
     const request = await fetch('https://pokeapi.co/api/v2/pokemon/1')
     const response = await request.json()
-    console.log(response)
+    // console.log(response)
     setPokemon(response)
   }
 
-  // const randomPokemonClick = () => {
-  //   setPokemon(pokemon)
-  // }
+  const randomPokemonClick = () => {
+    const random = Math.floor(Math.random() * 151) + 1
+
+    const fetchRandomData = async () => {
+      const randomRequest = await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`)
+      const randomResponse = await randomRequest.json()
+      setPokemon(randomResponse)
+    }
+
+    fetchRandomData()
+  }
+
 
   if(!pokemon){return null }
 
@@ -35,7 +44,7 @@ const App = () => {
         <li key={type.slot}>{type.type.name}</li>
         ))}
       </ul>
-      {/* <button onClick={randomPokemonClick}>Show random pokemon</button> */}
+      <button onClick={randomPokemonClick}>Show random pokemon</button>
     </div>
   )
 }
